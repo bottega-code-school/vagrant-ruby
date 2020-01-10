@@ -1,0 +1,11 @@
+.vagrant
+authorized_keys
+packer_cache/
+output-virtualbox-iso/
+*.box
+jkl/
+ror/
+vm/
+Vagrantfile*
+!Vagrantfile.header
+!Vagrantfile.template
