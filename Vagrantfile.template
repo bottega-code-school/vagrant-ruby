@@ -1,0 +1,47 @@
+# frozen_string_literal: true
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "bottega/ruby"
+  config.ssh.username = "ubuntu"
+
+  # Required to work with webpack
+  config.vm.network :private_network, ip: "10.10.10.61"
+  # Create a forwarded port mapping which allows access to a specific port
+  # This one is for running Rails (puma, mongrel)
+  # Note that when you run `rails server`, you need to specify that it
+  # bind to host 0.0.0.0, not localhost, or the port forwarding won't work.
+  # `rails s -b 0.0.0.0`
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+  config.vm.network "forwarded_port", guest: 3035, host: 3035, auto_correct: true
+  # This one is for Jekyll
+  # Note that when you run `jekyll serve`, you need to specify that it
+  # use host 0.0.0.0, not localhost, or the port forwarding won't work.
+  # `jekyll serve -H 0.0.0.0 --force_polling`
+  config.vm.network "forwarded_port", guest: 4000, host: 4000, auto_correct: true
+  # Customize the amount of memory on the VM. We need a GB:
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "1024"
+  end
+  # Set the host name of the Vagrant machine to the current directory of the host.
+  config.vm.provision "shell",
+                      inline: "hostnamectl set-hostname '#{File.basename(Dir.getwd)}'"
+
+
+  # You can uncomment these lines if you're running the boxes on a Linux host.
+  # They allow you to run more commands from inside the box, but with the credentials
+  # from your host workstation.
+  config.vm.provision "copy-netrc",
+                      run: "never",
+                      type: "file",
+                      source: Dir.glob(File.join(Dir.home, "[._]netrc"), File::FNM_DOTMATCH).first,
+                      destination: ".netrc"
+  config.vm.provision "copy-gem",
+                      run: "never",
+                      type: "file",
+                      source: Dir.glob(File.join(Dir.home, ".gem", "credentials"), File::FNM_DOTMATCH).first,
+                      destination: ".gem/credentials"
+end
+
