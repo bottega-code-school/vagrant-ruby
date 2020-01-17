@@ -58,7 +58,13 @@ shift $((OPTIND-1))
 sudo apt-get update -y -qq
 sudo apt-get install -y -q linux-headers-generic
 sudo apt-get install -y -q build-essential autogen autoconf libtool
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q ruby sqlite3 libsqlite3-dev ruby-dev
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q ruby sqlite3 libsqlite3-dev ruby-dev gnupg2
+
+gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -sSL https://get.rvm.io | bash -s stable
+rvm requirements
+rvm install 2.7.0
+rvm use 2.7.0 --default
 
 if [[ $target = vagrant ]]; then
   # ./build-vagrant.sh
