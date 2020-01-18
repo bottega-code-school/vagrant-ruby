@@ -57,7 +57,7 @@ shift $((OPTIND-1))
 # ./update.sh
 sudo apt-get update -y -qq
 sudo apt-get install -y -q linux-headers-generic
-sudo apt-get install -y -q build-essential autogen autoconf libtool
+sudo apt-get install -y -q build-essential autogen autoconf libtool curl file git libssl-dev
 
 # sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
 
