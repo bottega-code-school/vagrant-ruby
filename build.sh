@@ -58,15 +58,18 @@ shift $((OPTIND-1))
 sudo apt-get update -y -qq
 sudo apt-get install -y -q linux-headers-generic
 sudo apt-get install -y -q build-essential autogen autoconf libtool
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
 
-sudo -u vagrant git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-sudo -u vagrant echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-sudo -u vagrant echo 'eval "$(rbenv initialize -)"' >> ~/.bashrc
-sudo -u vagrant source ~/.bashrc
-sudo -u vagrant git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-sudo -u vagrant rbenv install 2.7.0
-sudo -u vagrant rbenv global 2.7.0
+# sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
+
+yes "" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+
+brew install rbenv
+rbenv install 2.7.0
+rbenv global 2.7.0
 
 if [[ $target = vagrant ]]; then
   # ./build-vagrant.sh
