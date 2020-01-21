@@ -59,8 +59,6 @@ sudo apt-get update -y -qq
 sudo apt-get install -y -q linux-headers-generic
 sudo apt-get install -y -q build-essential autogen autoconf libtool curl file git libssl-dev zlib1g-dev
 
-# sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
-
 yes "" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
 test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -70,8 +68,6 @@ echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 brew install rbenv
 rbenv install 2.7.0
 rbenv global 2.7.0
-
-echo 'if which rbenv > /dev/null; then eval "$(rbenv initialize -)"; fi' >> ~/.bash_profile
 
 if [[ $target = vagrant ]]; then
   # ./build-vagrant.sh
