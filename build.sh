@@ -176,7 +176,7 @@ CONFIG_DB
 esac
 
 # ./build-jekyll.sh
-gem install jekyll -v $jekyll_version --no-document
+gem install jekyll -v $jekyll_version
 
 # ./build-prerequisites.sh
 # Nokogiri build dependencies (from http://www.nokogiri.org/tutorials/installing_nokogiri.html#ubuntu___debian)
@@ -311,9 +311,9 @@ fi
 
 # Bundler version must match the version on the target production box.
 # Need both versions during the transition to Bundler 2.
-install bundler -v 1.17.3 --no-document
-install bundler -v 2.0.1 --no-document
-install rails -v $rails_version --no-document
+# gem install bundler -v 1.17.3
+# gem install bundler -v 2.0.1
+gem install rails -v $rails_version
 
 # ./clean-up.sh
 sudo apt-get update -y -q
