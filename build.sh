@@ -176,7 +176,7 @@ CONFIG_DB
 esac
 
 # ./build-jekyll.sh
-sudo gem install jekyll -v $jekyll_version --no-document
+gem install jekyll -v $jekyll_version --no-document
 
 # ./build-prerequisites.sh
 # Nokogiri build dependencies (from http://www.nokogiri.org/tutorials/installing_nokogiri.html#ubuntu___debian)
@@ -250,7 +250,7 @@ EOF
     sudo apt-get install -y -q pdftk
 
     # Sprockets 4 needs Ruby 2.5
-    sudo gem install sprockets -v '~> 3.0'
+    gem install sprockets -v '~> 3.0'
     ;;
   20.04)
     # Node
@@ -311,9 +311,9 @@ fi
 
 # Bundler version must match the version on the target production box.
 # Need both versions during the transition to Bundler 2.
-sudo gem install bundler -v 1.17.3 --no-document
-sudo gem install bundler -v 2.0.1 --no-document
-sudo gem install rails -v $rails_version --no-document
+install bundler -v 1.17.3 --no-document
+install bundler -v 2.0.1 --no-document
+install rails -v $rails_version --no-document
 
 # ./clean-up.sh
 sudo apt-get update -y -q
