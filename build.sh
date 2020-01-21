@@ -71,6 +71,9 @@ brew install rbenv
 rbenv install 2.7.0
 rbenv global 2.7.0
 
+echo 'if which rbenv > /dev/null; then eval "$(rbenv initialize -)"; fi' >> ~/.bash_profile
+source ~/.bash_profile
+
 if [[ $target = vagrant ]]; then
   # ./build-vagrant.sh
   # Set up insecure key (standard Vagrant practice)
